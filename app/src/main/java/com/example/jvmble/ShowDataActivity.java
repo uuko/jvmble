@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import static com.example.jvmble.BleAdapter.uniqueID;
 
@@ -46,8 +47,12 @@ public class ShowDataActivity extends AppCompatActivity {
         startduty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (editText.getText().length()>0){
+                if ((editText.getText().length()>0) && ( Pattern.compile("[a-zA-Z]*")
+                        .matcher(editText.getText()).matches())){
                     sendOner();
+                }
+                else {
+                    Toast.makeText(ShowDataActivity.this, "請輸入字串", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -68,7 +73,7 @@ public class ShowDataActivity extends AppCompatActivity {
             try
             {
                 btSocket.getOutputStream().write("1".toString().getBytes());
-                String personName=editText.getText().toString()+"\n";
+                String personName=editText.getText().toString();
                 btSocket.getOutputStream().write(personName.getBytes());
                 disconnect();
             }
@@ -86,6 +91,8 @@ public class ShowDataActivity extends AppCompatActivity {
             try
             {
                 btSocket.getOutputStream().write("0".toString().getBytes());
+                String personName=editText.getText().toString();
+                btSocket.getOutputStream().write(personName.getBytes());
                 disconnect();
             }
             catch (IOException e)
