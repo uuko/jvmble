@@ -74,6 +74,9 @@ public class ShowDataActivity extends AppCompatActivity {
             {
                 btSocket.getOutputStream().write("1".toString().getBytes());
                 String personName=editText.getText().toString();
+                int personSize=personName.length()+1;
+                Log.d("qqqqqqqq", "sendOner: "+personSize);
+                btSocket.getOutputStream().write(String.valueOf(personSize).getBytes());
                 btSocket.getOutputStream().write(personName.getBytes());
                 disconnect();
             }
@@ -92,6 +95,8 @@ public class ShowDataActivity extends AppCompatActivity {
             {
                 btSocket.getOutputStream().write("0".toString().getBytes());
                 String personName=editText.getText().toString();
+                int personSize=personName.length()+1;
+                btSocket.getOutputStream().write(String.valueOf(personSize).getBytes());
                 btSocket.getOutputStream().write(personName.getBytes());
                 disconnect();
             }
