@@ -89,8 +89,10 @@ public class BleAdapter extends RecyclerView.Adapter<BleAdapter.ViewHolder>  {
                     BluetoothAdapter myBluetooth = BluetoothAdapter.getDefaultAdapter();
                     device = myBluetooth.getRemoteDevice(list.getAddress());
                     Log.d("aaaaaaaaaaaa", "onClick: " + list.getAddress());
-                    Intent intent=new Intent(context,ShowDataActivity.class);
-                    intent.putExtra("address",list.getAddress());
+//                    Intent intent=new Intent(context,ShowDataActivity.class);
+//                    intent.putExtra("address",list.getAddress());
+                    Intent intent=new Intent(context,FakeActivity.class);
+//                    intent.putExtra("address",list.getAddress());
                     context.startActivity(intent);
 
 
